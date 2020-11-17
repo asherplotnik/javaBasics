@@ -1,10 +1,12 @@
 package courseProject;
 
 public class Log {
+	
 	private long timestamp;
 	private int clientId;
 	private String description;
 	private float amount;
+
 	public Log(long timestamp, int clientId, String description, float amount) {
 		this.timestamp = timestamp;
 		this.clientId = clientId;
@@ -13,7 +15,7 @@ public class Log {
 	}
 	
 	public String getData() {
-		return "Timestamp: " + timestamp + "CLient ID: " + clientId + "Description: " + "Amount: " + amount;
+		return "Timestamp: " + timestamp + "CLient ID: " + clientId + "Description: " + description + "Amount: " + amount;
 	}
 }
 
