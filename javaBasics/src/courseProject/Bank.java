@@ -1,15 +1,17 @@
 package courseProject;
 
 public class Bank {
-	Client[] clients;
-	Logger logService, logger;
-
+	private Client[] clients;
+	private Logger logService, logger;
+	private static float commissionSum;
 	// account updater
-	public Bank() {
+	private Bank() {
 		this.clients = new Client[100];
 		this.logService = new Logger("Log Service");
 	}
-
+	
+	
+	
 	public Client[] getClients() {
 		return clients;
 	}

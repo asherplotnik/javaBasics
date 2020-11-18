@@ -1,6 +1,6 @@
 package courseProject;
 
-public class Client {
+public abstract class Client {
 	private int id;
 	private String name;
 	private float balance;
@@ -8,7 +8,7 @@ public class Client {
 	private float commissionRate;
 	private float interestRate;
 	private Logger logger;
-
+	
 	public Client(int id, String name, float balance) {
 		this.id = id;
 		this.name = name;
