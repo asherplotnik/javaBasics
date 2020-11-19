@@ -28,10 +28,4 @@ public class Cinema {
 		}
 	}
 	
-	public static void main(String[] args) {
-		Cinema myCinema = new Cinema(5,10);
-		myCinema.add("ash",2,2);
-		myCinema.add("roy",2,2);
-		myCinema.display();
-	}
 }
