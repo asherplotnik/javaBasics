@@ -31,7 +31,7 @@ public class Bank {
 		for (i = 0; i < clients.length; i++) {
 			if (clients[i] == null) {
 				clients[i] = client;
-				logService.makeLogEntry("Client added- ", client.getId(), 0.0F);
+				logService.log(new Log(client.getId(), "Client added- " , 0.0F));
 				return;
 			}
 		}
@@ -42,7 +42,7 @@ public class Bank {
 	}
 
 	public void removeClient(int id) {
-		logService.makeLogEntry("Client removed- ", clients[id].getId(), 0.0F);
+		logService.log(new Log(clients[id].getId(), "Client removed- " , 0.0F));
 		clients[id] = null;
 	}
 

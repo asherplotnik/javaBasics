@@ -5,8 +5,9 @@ public class Account {
 	private float balance;
 
 	public Account(int id, float balance) {
+		super();
 		this.id = id;
-		this.balance = balance;
+		setBalance(balance);
 	}
 
 	public float getBalance() {
@@ -15,7 +16,6 @@ public class Account {
 
 	public void setBalance(float balance) {
 		this.balance = balance;
-		// need to log the balance as well.
 	}
 
 	public int getId() {

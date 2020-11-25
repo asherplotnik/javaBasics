@@ -1,6 +1,6 @@
 package courseProject;
 
-public abstract class Client {
+public class Client {
 	private int id;
 	private String name;
 	private float balance;
@@ -16,7 +16,7 @@ public abstract class Client {
 		this.commissionRate = 0;
 		this.interestRate = 0;
 		this.accounts = new Account[5];
-		this.logger = new Logger(id + "," + name);
+		this.logger = new Logger(null);
 	}
 
 	public String getName() {
@@ -48,8 +48,8 @@ public abstract class Client {
 		for (i = 0; i < accounts.length; i++) {
 			if (accounts[i] == null) {
 				accounts[i] = account;
-				logger.makeLogEntry("Account added- " + account.getId(), this.id, 0.0F);
-				return;
+				logger.log(new Log(this.id, "account added:" + account.getId(), account.getBalance()));
+				break;
 			}
 		}
 		if (i == 5) {
@@ -63,19 +63,19 @@ public abstract class Client {
 	}
 
 	public void removeAccount(int id) {
-		logger.makeLogEntry("Account removed- " + accounts[id].getId(), this.id, 0.0F);
+		logger.log(new Log(this.id, "account removed:" + accounts[id], 0.0F));
 		accounts[id] = null;
 	}
 
 	public void deposite(float amount) {
 		this.balance += amount - amount * commissionRate;
-		logger.makeLogEntry("Deposite to balance-", this.id, amount);
+		logger.log(new Log(this.id, "Deposite to balance-", amount));
 	}
 
 	public void withdraw(float amount) {
 		if (amount + amount * commissionRate >= 0) {
 			this.balance -= amount + amount * commissionRate;
-			logger.makeLogEntry("Withdraw from balance-", this.id, amount);
+			logger.log(new Log(this.id, "Withdraw from balance-", amount));
 		} else {
 			System.out.println("Not enough funds to make transactions.");
 		}
@@ -86,7 +86,8 @@ public abstract class Client {
 			if (accounts[i] != null) {
 				float newBalance = accounts[i].getBalance() + accounts[i].getBalance() * interestRate;
 				accounts[i].setBalance(newBalance);
-				logger.makeLogEntry("auto update interest ", this.id, newBalance);
+			//	logger.makeLogEntry("auto update interest ", this.id, newBalance);
+				logger.log(new Log(this.id, "auto update interest ", newBalance));
 			}
 		}
 	}
