@@ -8,7 +8,9 @@ public class Car extends Vehicle {
 
 	@Override
 	public void goTO(Location location) {
-		setLocation(location);
+		//setLocation(location);
+		this.location.setX(location.getX());
+		this.location.setY(location.getY());
 		//System.out.println("im driving to location: (" + location.getX() + ", " + location.getY());
 	}
 	

@@ -1,8 +1,11 @@
-package courseProject;
+package BankProject;
+
+import java.util.Arrays;
 
 public class Bank {
+	private static Bank instance = new Bank(); 
 	private Client[] clients;
-	private Logger logService, logger;
+	private Logger logService;
 	private static float commissionSum;
 	// account updater
 	private Bank() {
@@ -10,7 +13,9 @@ public class Bank {
 		this.logService = new Logger("Log Service");
 	}
 	
-	
+	public Bank getInstance() {
+		return instance;
+	}
 	
 	public Client[] getClients() {
 		return clients;
@@ -23,7 +28,7 @@ public class Bank {
 				sum += clients[i].getFortune();
 			}
 		}
-		return sum;
+		return sum + Bank.commissionSum;
 	}
 
 	public void addClient(Client client) {
@@ -41,9 +46,24 @@ public class Bank {
 		;
 	}
 
-	public void removeClient(int id) {
-		logService.log(new Log(clients[id].getId(), "Client removed- " , 0.0F));
-		clients[id] = null;
+	public void removeClient(Client client) {
+		
+		if(Arrays.asList(clients).contains(client)) {
+			logService.log(new Log(client.getId(), "Client removed- " , 0.0F));
+			client = null;
+		} else {
+			System.out.println("error - client dont exists!");
+		}
+	}
+	
+	public static void addCommission(float num) {
+		commissionSum+=num;
+	}
+	
+	public void printClientList() {
+		for ( Client client : clients) {
+			System.out.println(client);
+		}
 	}
 
 	public void viewLogs() {

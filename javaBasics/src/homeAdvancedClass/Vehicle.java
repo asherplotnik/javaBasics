@@ -8,9 +8,9 @@ public abstract class Vehicle implements Navigator {
 		this.location = loctaion;
 	}
 	
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+//	public void setLocation(Location location) {
+//		this.location = location;
+//	}
 	public int getNumber() {
 		return number;
 	}

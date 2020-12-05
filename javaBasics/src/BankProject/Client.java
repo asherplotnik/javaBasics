@@ -1,12 +1,12 @@
-package courseProject;
+package BankProject;
 
-public class Client {
+public abstract class Client {
 	private int id;
 	private String name;
 	private float balance;
 	private Account[] accounts;
-	private float commissionRate;
-	private float interestRate;
+	protected float commissionRate;
+	protected float interestRate;
 	private Logger logger;
 	
 	public Client(int id, String name, float balance) {
@@ -55,7 +55,6 @@ public class Client {
 		if (i == 5) {
 			System.out.println("No account Available");
 		}
-		;
 	}
 
 	public Account getAccount(int id) {
@@ -69,12 +68,14 @@ public class Client {
 
 	public void deposite(float amount) {
 		this.balance += amount - amount * commissionRate;
+		Bank.addCommission(amount * commissionRate);
 		logger.log(new Log(this.id, "Deposite to balance-", amount));
 	}
 
 	public void withdraw(float amount) {
 		if (amount + amount * commissionRate >= 0) {
 			this.balance -= amount + amount * commissionRate;
+			Bank.addCommission(amount * commissionRate);
 			logger.log(new Log(this.id, "Withdraw from balance-", amount));
 		} else {
 			System.out.println("Not enough funds to make transactions.");
@@ -101,5 +102,31 @@ public class Client {
 		}
 		return sum;
 	}
+	
+	public String getAccountsDetailsAsString() {
+		String s ="";
+		for (Account account : accounts) {
+			if (account != null) {
+				s += "\n" + " Account Id: "+ account.getId() + ", Account Balance: " + getBalance() ;
+			}
+		}
+		
+		return s;
+	}
+
+	@Override
+	public String toString() {
+		return "( " + id + ", " + name + ", " + balance +  ", " + commissionRate + ", " + interestRate + getAccountsDetailsAsString() + ")";
+	}
+
+	@Override
+	public boolean equals(Object client) {
+		if (this.id == ((Client)client).id) {
+			return true;
+		}
+		else
+			return false;
+	}
+	
 
 }

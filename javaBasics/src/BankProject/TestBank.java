@@ -1,4 +1,4 @@
-package courseProject;
+package BankProject;
 
 public class TestBank {
 

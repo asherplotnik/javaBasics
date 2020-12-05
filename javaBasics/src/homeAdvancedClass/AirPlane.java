@@ -17,7 +17,8 @@ public class AirPlane extends Vehicle implements Flyer{
 			takeff();
 		}
 		//System.out.println("im flying to location: (" + location.getX() +", "+ location.getY());
-		setLocation(location);
+		this.location.setX(location.getX());
+		this.location.setY(location.getY());
 	}
 
 	@Override
