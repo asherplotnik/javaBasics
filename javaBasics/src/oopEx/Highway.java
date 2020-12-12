@@ -28,7 +28,7 @@ public class Highway {
 		System.out.println(Arrays.toString(cars));
 	}
 	
-	public void populateHighway() {
+	public void populateHighway(int start) {
 		int carClass = 0;
 		int numberOfCars = (int)(Math.random()*95+6);
 		for (int i = 0; i < numberOfCars; i++) {
@@ -36,16 +36,16 @@ public class Highway {
 			carClass = (int)(Math.random()*3);
 			switch (carClass) {
 			case 0: 
-				cars[i] = new SportsCar(i, speed);
+				cars[i] = new SportsCar(start+i, speed);
 				break;
 			case 1: 
-				cars[i] = new FamilyCar(i, speed);
+				cars[i] = new FamilyCar(start+i, speed);
 				break;
 			case 2: 
-				cars[i] = new Car(i, speed);
+				cars[i] = new Car(start+i, speed);
 				break;
 			default:
-				cars[i] = new Car(i, speed);
+				cars[i] = new Car(start+i, speed);
 			}
 		}
 	}
