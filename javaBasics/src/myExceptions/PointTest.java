@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 public class PointTest {
 	public static void main(String[] args) {
-		Point p1 = new Point(0, 0);
+		Point p1 = new Point();
+		
 		boolean inputCheck = false;
 		boolean xEnteredAsNumber = false;
 		boolean yEnteredAsNumber = false;
@@ -24,12 +25,12 @@ public class PointTest {
 			}
 
 			catch (OutOfBoundPointException e) {
-				if (inX < 0) {
-					inX = 0;
+				if (inX < Point.MIN) {
+					inX = Point.MIN;
 					System.out.println("X out of range set to minimum 0");
 				}
-				if (inX > 100) {
-					inX = 100;
+				if (inX > Point.MAX) {
+					inX = Point.MAX;
 					System.out.println("X out of range set to minimum 100");
 				}
 
@@ -57,13 +58,13 @@ public class PointTest {
 			
 			catch (OutOfBoundPointException e) {
 
-				if (inY < 0) {
-					inY = 0;
+				if (inY < Point.MIN) {
+					inY = Point.MIN;
 					System.out.println("Y out of range set to minimum 0");
 
 				}
-				if (inY > 100) {
-					inY = 100;
+				if (inY > Point.MAX) {
+					inY = Point.MAX;
 					System.out.println("Y out of range set to minimum 100");
 				}
 				try {

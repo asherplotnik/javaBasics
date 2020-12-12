@@ -25,6 +25,9 @@ public class Test {
 			AgeComperator ageComparator = new AgeComperator();
 			list.sort(ageComparator);
 			System.out.println(list);
+			PersonNameComparator nameComperator = new PersonNameComparator();
+			list.sort(nameComperator);
+			System.out.println(list);
 		}
 
 	}
