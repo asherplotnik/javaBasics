@@ -24,7 +24,7 @@ public class Test {
 	public static void populateCountry(Country c) {
 		for (int i = 0 ; i< c.getHighways().length;i++) {
 			c.getHighways()[i] = new Highway("highway" + i);
-			c.getHighways()[i].populateHighway(i);
+			c.getHighways()[i].populateHighway(100*i);
 			c.getHighways()[i].printCars();
 		}
 	}
