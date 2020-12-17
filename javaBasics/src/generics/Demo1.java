@@ -1,4 +1,4 @@
-package b.generics;
+package generics;
 
 import java.util.Collection;
 import java.util.Map;

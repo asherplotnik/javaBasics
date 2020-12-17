@@ -1,12 +1,12 @@
-package b.generics;
+package generics;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
-import b.generics.foods.Food;
-import b.generics.foods.Fruit;
-import b.generics.foods.Orange;
+import generics.foods.Food;
+import generics.foods.Fruit;
+import generics.foods.Orange;
 
 public class Demo2SubTyping {
 
