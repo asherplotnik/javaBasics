@@ -1,9 +1,9 @@
 package oop;
-
-public class Point {
-	private int x;
+import java.io.Serializable;
+public class Point implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int y;
-	
+	private int x;
 	public Point() {
 		this(0);
 	}
