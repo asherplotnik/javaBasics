@@ -1,4 +1,4 @@
-package b.generics.foods;
+package generics.foods;
 
 public class Food {
 	@Override
