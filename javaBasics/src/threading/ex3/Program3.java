@@ -1,6 +1,6 @@
 package threading.ex3;
 
-public class Program3 {
+public class Program3  {
 	public  static void main(String[] args) {
 		Flag flag = new Flag();
 		Runner run = new Runner(flag,100);

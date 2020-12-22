@@ -1,6 +1,6 @@
 package threading.ex3;
 	
-public class Flag {
+public class Flag  {
 	private boolean raised = false;
 	
 	public boolean raiseFlag() {

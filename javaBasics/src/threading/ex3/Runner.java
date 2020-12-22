@@ -2,7 +2,7 @@ package threading.ex3;
 
 public class Runner implements Runnable{
 	Flag flag;
-	int num ;
+	int num;
 	public Runner(Flag flag,int num) {
 		this.flag = flag;
 		this.num = num;
