@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ProgramEx {
 	private static int nextTaskId  = 1 ;
-	private static Scanner scan = new Scanner(System.in);
+	private static final Scanner scan = new Scanner(System.in);
 	
 	public static Task getTeskFromUser() {
 		System.out.print("Enter task description: ");
