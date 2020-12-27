@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ProgramEx {
 	private static int nextTaskId  = 1 ;
-	private static final Scanner scan = new Scanner(System.in);
+	private static  Scanner scan = new Scanner(System.in);
 	
 	public static Task getTeskFromUser() {
 		System.out.print("Enter task description: ");
@@ -21,13 +21,13 @@ public class ProgramEx {
 	
 	public static void switchMenu(Scheduler scheduler) {
 		while (true) {
-			System.out.println("Enter Operation: ");
 			System.out.println("a  to add a task. ");
 			System.out.println("b  to display a task. ");
 			System.out.println("c  to mark task as done a task. ");
 			System.out.println("d  to start monitor tasks. ");
-			System.out.println("e  to stop monitor tasks. ");
+			System.out.println("e  to pause/unpause monitor tasks. ");
 			System.out.println("x  to exit. ");
+			System.out.print("Enter Operation: ");
 			String s = scan.nextLine();
 			switch(s) {
 				case "a":
@@ -44,13 +44,17 @@ public class ProgramEx {
 					scheduler.getTask(dId).setDone(true);
 					break;
 				case "d":
-					scheduler.startMonitoringTasks();
+					try {
+						scheduler.startMonitoringTasks();
+					} catch (IllegalThreadStateException e) {
+						System.out.println("Error !!!");
+					}
 					break;
 				case "e":
-					scheduler.stopMonitoringTasks();
+					scheduler.pauseMonitoringTasks();
 					break;
 				case "x":
-					scheduler.stopMonitoringTasks();
+					scheduler.stopMonitoring();
 					return;				
 			}
 		}
@@ -59,8 +63,7 @@ public class ProgramEx {
 	public static void main(String[] args) {
 		Scheduler scheduler = new Scheduler();
 		switchMenu(scheduler);
-		
-
+		scan.close();
 	}
 
 }

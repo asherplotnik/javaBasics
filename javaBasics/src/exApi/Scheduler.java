@@ -14,6 +14,10 @@ public class Scheduler {
 	private SchedulerRunnable schedulerRunner = new SchedulerRunnable(this);
 	private Thread schedulerThread = new Thread(schedulerRunner,"st1");
 	
+	public boolean isMonitoringActive() {
+		return monitoringActive;
+	}
+
 	public void remove(int id) {
 		for (int i = 0 ; i< tasks.size();i++) {
 			if(tasks.get(i).getId() == id) {
@@ -42,6 +46,10 @@ public class Scheduler {
 		return tasks;
 	}
 	
+	public void stopMonitoring() {
+		schedulerThread.interrupt();
+	}
+	
 	public List<Task> getAllTasksDueUntil(LocalDateTime due) {
 		List<Task> temp = new ArrayList<>();
 		for (int i = 0 ; i< tasks.size();i++) {
@@ -52,14 +60,21 @@ public class Scheduler {
 		return temp;
 	}
 	
-	public void startMonitoringTasks() {
-		monitoringActive=true;
-		schedulerThread.start();
-		System.out.println("monitoring status = " + monitoringActive);
+	public  void startMonitoringTasks() {
+		System.out.println(schedulerThread.getState());
+		if (schedulerThread.isAlive()) {
+			System.out.println("Allready monitoring !!!");
+			return;
+		} else {
+			monitoringActive=true;			
+			schedulerThread.start();
+			System.out.println("monitoring status = " + monitoringActive);
+		}
 	}
-	public void stopMonitoringTasks() {
-		monitoringActive=false;
-		schedulerThread.interrupt();
+	public void pauseMonitoringTasks() {
+		synchronized (this.tasks) {
+			monitoringActive = !monitoringActive;	
+		}
 		System.out.println("monitoring status = " + monitoringActive);
 	}
 	

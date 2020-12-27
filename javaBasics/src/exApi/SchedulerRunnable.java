@@ -1,29 +1,29 @@
 package exApi;
 
-public class SchedulerRunnable implements Runnable{
+public class SchedulerRunnable implements Runnable {
 	Scheduler scheduler;
-	public SchedulerRunnable (Scheduler scheduler) {
+	public SchedulerRunnable(Scheduler scheduler) {
 		this.scheduler = scheduler;
 	}
 
 	@Override
 	public void run() {
-		Thread curr = Thread.currentThread();
-		try {
-			int count = 0;
-			while (true) {
-				scheduler.checkDeadlines();
-				Thread.sleep(1000);
-				if (++count == 10) {
-					System.out.println("---monitoring---");
-					count = 0;
+		int count = 0;
+				try {
+					while (true) {
+						synchronized (scheduler.getAllTasks()){
+						if (scheduler.isMonitoringActive())
+							scheduler.checkDeadlines();
+						Thread.sleep(1000);
+						if (++count == 10) { // print only every 10 seconds
+							System.out.println("---monitoring---" + scheduler.isMonitoringActive());
+							count = 0;
+						}
+						}
+					}
+				} catch (InterruptedException e) {
+					System.out.println("Finished!!!");				
 				}
-				if (curr.isInterrupted())
-					return;
-			}
-		} catch (InterruptedException e) {
-			return;
-		}
 	}
 
 }
