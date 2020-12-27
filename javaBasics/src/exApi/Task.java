@@ -2,7 +2,7 @@ package exApi;
 
 import java.time.LocalDateTime;
 
-public class Task {
+public class Task implements Comparable<Task>{
 	int id;
 	private String description; 
 	private boolean done;
@@ -15,6 +15,18 @@ public class Task {
 		this.deadline = deadline;
 	}
 	
+	
+	
+	@Override
+	public int compareTo(Task o) {
+		if (!this.deadline.isBefore(o.getDeadline())) {
+			return -1;
+		} else if (!this.deadline.isEqual(o.getDeadline())){
+			return 0;
+		}
+		return -1;
+	}
+
 	public void doTask() {
 		done = true;
 	}
