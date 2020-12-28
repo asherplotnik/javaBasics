@@ -16,10 +16,10 @@ public class Connect {
 		String password = "h7r2haba";
 		try (Connection con = DriverManager.getConnection(url,username,password);) {
 			System.out.println("connected to: " +url);
-			
-			//String sql  = "insert into book values(4,'book4','ash')";
-			String sql1  = "select * from book";
 			Statement stmt = con.createStatement();
+			String sql1  = "select * from book";
+			String sql  = "insert into book values(5,'book5','ash')";
+			stmt.executeUpdate(sql);
 			ResultSet rs = stmt.executeQuery(sql1);
 			System.out.println("ID" + "\t" +"TITLE" + "\t   " +"AUTHOR");
 			System.out.println("=========================");

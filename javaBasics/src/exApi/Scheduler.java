@@ -8,18 +8,18 @@ public class Scheduler {
 	private List<Task> tasks = new ArrayList<>();
 	private boolean monitoringActive = false ;
 	//private long checkRateMilis;
-	public void addTask(Task task) {
+	public synchronized void addTask(Task task) {
 		tasks.add(task);
 	}
 	private SchedulerRunnable schedulerRunner = new SchedulerRunnable(this);
 	private Thread schedulerThread = new Thread(schedulerRunner,"st1");
 	
-	public boolean isMonitoringActive() {
+	public synchronized boolean isMonitoringActive() {
 		return monitoringActive;
 	}
 	
 
-	public void remove(int id) {
+	public synchronized void remove(int id) {
 		for (int i = 0 ; i< tasks.size();i++) {
 			if(tasks.get(i).getId() == id) {
 				tasks.remove(i);
@@ -34,7 +34,7 @@ public class Scheduler {
 		}
 	}
 	
-	public Task getTask(int id) {
+	public synchronized Task getTask(int id) {
 		for (int i = 0 ; i< tasks.size();i++) {
 			if(tasks.get(i).getId() == id) {
 				return tasks.get(i);
@@ -43,15 +43,15 @@ public class Scheduler {
 		return null;
 	}
 	
-	public List<Task> getAllTasks(){
+	public synchronized List<Task> getAllTasks(){
 		return tasks;
 	}
 	
-	public void stopMonitoring() {
+	public synchronized void stopMonitoring() {
 		schedulerThread.interrupt();
 	}
 	
-	public List<Task> getAllTasksDueUntil(LocalDateTime due) {
+	public synchronized List<Task> getAllTasksDueUntil(LocalDateTime due) {
 		List<Task> temp = new ArrayList<>();
 		for (int i = 0 ; i< tasks.size();i++) {
 			if(tasks.get(i).getDeadline().isBefore(due)) {
@@ -61,7 +61,7 @@ public class Scheduler {
 		return temp;
 	}
 	
-	public  void startMonitoringTasks() {
+	public  synchronized void startMonitoringTasks() {
 		System.out.println(schedulerThread.getState());
 		if (schedulerThread.isAlive()) {
 			System.out.println("Allready monitoring !!!");
@@ -72,14 +72,12 @@ public class Scheduler {
 			System.out.println("monitoring status = " + monitoringActive);
 		}
 	}
-	public void pauseMonitoringTasks() {
-		synchronized (this.tasks) {
-			monitoringActive = !monitoringActive;	
-		}
+	public synchronized void pauseMonitoringTasks() {
+		monitoringActive = !monitoringActive;	
 		System.out.println("monitoring status = " + monitoringActive);
 	}
 	
-	public void checkDeadlines() {
+	public synchronized void checkDeadlines() {
 		LocalDateTime now = LocalDateTime.now();
 		for (Task task : tasks) {
 			if (task.getDeadline().isBefore(now) && !task.isAlertPopped() && !task.isDone()) {
