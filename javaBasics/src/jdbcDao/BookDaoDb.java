@@ -46,7 +46,7 @@ public class BookDaoDb implements BookDao{
 				book.setTitle(rs.getString("title"));
 				book.setAuthor(rs.getString("author"));
 				book.setPrice(rs.getDouble("price"));
-				LocalDate localDate = LocalDate.parse(rs.getDate("publication").toString());
+				LocalDate localDate = rs.getDate("publication").toLocalDate();
 				book.setPublication(localDate);
 				return book;
 			} else {
@@ -106,7 +106,7 @@ public class BookDaoDb implements BookDao{
 				book.setTitle(rs.getString("title"));
 				book.setAuthor(rs.getString("author"));
 				book.setPrice(rs.getDouble("price"));
-				LocalDate localDate = LocalDate.parse(rs.getDate("publication").toString());
+				LocalDate localDate = rs.getDate("publication").toLocalDate();
 				book.setPublication(localDate);
 				list.add(book);
 			}
