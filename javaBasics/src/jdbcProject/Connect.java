@@ -24,6 +24,7 @@ public class Connect {
 			System.out.println("ID" + "\t" +"TITLE" + "\t   " +"AUTHOR");
 			System.out.println("=========================");
 			while (rs.next()) {
+				
 				int id = rs.getInt("ID");
 		        String title = rs.getString("TITLE");
 		        String author = rs.getString("AUTHOR");		        
