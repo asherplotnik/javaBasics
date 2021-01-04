@@ -64,15 +64,16 @@ public class BookDaoDb implements BookDao{
 	@Override
 	public void update(Book book) throws DaoException {
 		try (Connection con = DriverManager.getConnection(url,username,password);){
-			if(get(book.getId()) != null) {			
-				String sql = "update book set title = ? , author = ?, price = ? , publication = ? where id = ?";
-				PreparedStatement pstmt = con.prepareStatement(sql);
-				pstmt.setString(1,book.getTitle());
-				pstmt.setString(2,book.getAuthor());
-				pstmt.setDouble(3,book.getPrice());
-				pstmt.setDate(4, Date.valueOf(book.getPublication()));
-				pstmt.setInt(5,book.getId());
-				pstmt.executeUpdate();
+			String sql = "update book set title = ? , author = ?, price = ? , publication = ? where id = ?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,book.getTitle());
+			pstmt.setString(2,book.getAuthor());
+			pstmt.setDouble(3,book.getPrice());
+			pstmt.setDate(4, Date.valueOf(book.getPublication()));
+			pstmt.setInt(5,book.getId());
+			int rowCount = pstmt.executeUpdate();
+			if(rowCount == 0) {
+				throw new DaoException("Updating book: " + book + " faild. id not found");	
 			}
 		} catch (SQLException e) {
 			throw new DaoException("Updating book: " + book + " faild.", e );
@@ -84,11 +85,14 @@ public class BookDaoDb implements BookDao{
 
 	@Override
 	public void delete(int id) throws DaoException {
-		try (Connection con = DriverManager.getConnection(url,username,password);){
+		try (Connection con = DriverManager.getConnection(url,username,password);){	
 			String sql = "delete from book where id = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,id);			
-			pstmt.executeUpdate();
+			int rowCount = pstmt.executeUpdate();
+			if(rowCount == 0) {
+				throw new DaoException("Deleting book id :" + id + " faild. id not found");					
+			}	
 		} catch (SQLException e) {
 			throw new DaoException("Deleting book with id: " + id + " faild.", e );
 		}
@@ -120,13 +124,13 @@ public class BookDaoDb implements BookDao{
 	
 	public static void main(String[] args) {
 		//Book book = new Book(4,"nui", "cute", 200, LocalDate.of(2015,01,05));
-		//Book book2 = new Book(4,"nui plotnik", "good", 300, LocalDate.of(1980,8,10));
+		Book book2 = new Book(5,"nui", "good", 300, LocalDate.of(1980,8,10));
 		BookDaoDb dao = new BookDaoDb();
 		try {
 			//dao.save(book);
 			//System.out.println(dao.get(4));
-			//dao.update(book2);
-			//System.out.println(dao.get(4));
+			dao.update(book2);
+			System.out.println(dao.get(4));
 			System.out.println(dao.getAllBooks());
 		} catch (DaoException e) {
 			System.out.println(e);

@@ -10,7 +10,7 @@ public class School {
 		students = new Student[100];
 	}
 		
-	public School getInstance() {
+	public static School getInstance() {
 		return instance;
 	}
 	

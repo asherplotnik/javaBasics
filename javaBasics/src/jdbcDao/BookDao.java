@@ -24,9 +24,7 @@ public interface BookDao {
 	
 	
 	/**
-	 * 
 	 *  update a book to storage
-	 * 
 	 * @param book
 	 * @throws DaoException
 	 */
@@ -34,8 +32,7 @@ public interface BookDao {
 	
 	/**
 	 * 
-	 *  delete a book to storage
-	 * 
+	 * delete a book from storage
 	 * @param id
 	 * @throws DaoException
 	 */
