@@ -29,8 +29,6 @@ public class ObjectStream {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 }
