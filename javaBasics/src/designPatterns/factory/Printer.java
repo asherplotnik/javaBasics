@@ -7,5 +7,5 @@ public interface Printer {
 	String getPrinterType();
 
 	String getPrinterInk();
-
+	
 }

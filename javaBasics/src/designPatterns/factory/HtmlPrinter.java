@@ -32,4 +32,8 @@ public class HtmlPrinter implements Printer {
 		return ink;
 	}
 
+	
+	
+	
+
 }
