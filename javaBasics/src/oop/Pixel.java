@@ -1,6 +1,7 @@
 package oop;
 
 public class Pixel extends Point{
+	private static final long serialVersionUID = 1L;
 	private String color;
 	public Pixel(int x, int  y, String color) {
 		super(x,y);
