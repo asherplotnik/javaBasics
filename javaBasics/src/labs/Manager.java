@@ -12,7 +12,6 @@ public class Manager extends Employee{
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Manager";
 	}
 
@@ -51,7 +50,6 @@ public class Manager extends Employee{
 
 	@Override
 	public String getDepatment() {
-		// TODO Auto-generated method stub
 		return super.getDepatment();
 	}
 

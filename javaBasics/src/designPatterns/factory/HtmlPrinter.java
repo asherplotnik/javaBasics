@@ -22,13 +22,11 @@ public class HtmlPrinter implements Printer {
 
 	@Override
 	public String getPrinterType() {
-		// TODO Auto-generated method stub
 		return printerType;
 	}
 
 	@Override
 	public String getPrinterInk() {
-		// TODO Auto-generated method stub
 		return ink;
 	}
 
