@@ -7,7 +7,7 @@ public class Program1 {
 		CounterRun counterRun = new CounterRun(10);
 		Thread t1 = new Thread(counterRun,"t1");
 		t1.start();
-		Thread.sleep(6000);
+		Thread.sleep(7000);
 		t1.interrupt();
 	}
 }
